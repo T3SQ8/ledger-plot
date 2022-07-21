@@ -58,9 +58,9 @@ def main():
             date, amount = process_line(transaction)
             dates.append(date)
             amounts.append(amount)
-        plt.plot(dates, amounts, label=category)
+        plt.plot(dates, amounts, label=category, marker='o')
 
-
+    plt.grid()
     plt.legend()
     plt.show()
 
