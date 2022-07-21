@@ -23,19 +23,21 @@ def main():
     parser.add_argument('ledger_files', nargs='+', metavar='FILE', help='Input ledger file(s).')
     # Limit timeframes specified to only one
     timeframe_arg = parser.add_mutually_exclusive_group()
-    timeframe_arg.add_argument('-D', '--daily', dest='timeframe', action='store_const', const='-D',
-            default='-D', # Setting the default value
-            help='Group postings by day. (Default)')
-    timeframe_arg.add_argument('-W', '--weekly', dest='timeframe', action='store_const', const='-W',
-            help='Group postings by week (starting on Sundays).')
-    timeframe_arg.add_argument('-M', '--monthly', dest='timeframe', action='store_const',
-            const='-M',
-            help='Group postings by month.')
-    timeframe_arg.add_argument('--quarterly', dest='timeframe', action='store_const',
-            const='--quarterly',
-            help='Group postings by fiscal quarter.')
-    timeframe_arg.add_argument('-Y', '--yearly', dest='timeframe', action='store_const', const='-Y',
-            help='Group postings by year.')
+    timeframe_arg.add_argument('-D', '--daily', const='-D', default='-D', # Default value
+            help='Group postings by day. (Default)',
+            dest='timeframe', action='store_const')
+    timeframe_arg.add_argument('-W', '--weekly', const='-W',
+            help='Group postings by week (starting on Sundays).',
+            dest='timeframe', action='store_const')
+    timeframe_arg.add_argument('-M', '--monthly', const='-M',
+            help='Group postings by month.',
+            dest='timeframe', action='store_const')
+    timeframe_arg.add_argument('--quarterly', const='--quarterly',
+            help='Group postings by fiscal quarter.',
+            dest='timeframe', action='store_const')
+    timeframe_arg.add_argument('-Y', '--yearly', const='-Y',
+            help='Group postings by year.',
+            dest='timeframe', action='store_const')
     args = parser.parse_args()
 
     ledger_command = ['ledger', 'reg', args.timeframe]
